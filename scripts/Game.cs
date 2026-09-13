@@ -17,8 +17,7 @@ public partial class Game : Node2D {
 
 	public void OnShootProjectile() {
 		var projectileInstance = _projectileScene.Instantiate<Projectile>();
-		Vector2 projectileStartingPosition = new Vector2(_player.GlobalPosition.X + (float)20.0f, _player.GlobalPosition.Y);
-		projectileInstance.GlobalPosition = projectileStartingPosition;
+		projectileInstance.GlobalPosition = _player.GlobalPosition with { X = _player.GlobalPosition.X + 20.0f };
 		AddChild(projectileInstance);
 	}
 }
