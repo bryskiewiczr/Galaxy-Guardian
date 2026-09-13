@@ -8,6 +8,7 @@ public partial class Player : CharacterBody2D {
     [Export] private float _speed = 120.0f;
     private Vector2 _direction = new Vector2(0.0f, 0.0f);
     private AnimationPlayer _animationPlayer;
+    public Marker2D ProjectileSpawnOffset;
 
     // screen size
     private float _screenWidth;
@@ -24,6 +25,7 @@ public partial class Player : CharacterBody2D {
         _screenHeight = GetViewportRect().Size.Y;
         _screenWidth = GetViewportRect().Size.X;
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        ProjectileSpawnOffset = GetNode<Marker2D>("ProjectileSpawnOffset");
     }
 
     public override void _PhysicsProcess(double delta) {
