@@ -8,6 +8,7 @@ public partial class Player : CharacterBody2D {
     [Export] private float _speed = 120.0f;
     private Vector2 _direction = new Vector2(0.0f, 0.0f);
     private AnimationPlayer _animationPlayer;
+    private AnimationPlayer _flashAnimationPlayer;
     public Marker2D ProjectileSpawnOffset;
 
     // screen size
@@ -19,12 +20,14 @@ public partial class Player : CharacterBody2D {
 
     public void Shoot() {
         EmitSignal(SignalName.ShootProjectile);
+        _flashAnimationPlayer.Play("default");
     }
     
     public override void _Ready() {
         _screenHeight = GetViewportRect().Size.Y;
         _screenWidth = GetViewportRect().Size.X;
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _animationPlayer = GetNode<AnimationPlayer>("ShipAnimationPlayer");
+        _flashAnimationPlayer = GetNode<AnimationPlayer>("FlashAnimationPlayer");
         ProjectileSpawnOffset = GetNode<Marker2D>("ProjectileSpawnOffset");
     }
 
