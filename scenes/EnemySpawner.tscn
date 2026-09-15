@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://djhauyt4rclak"]
+
+[ext_resource type="Script" uid="uid://bcyulrgavlf32" path="res://scripts/EnemySpawner.cs" id="1_wimyj"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=317281176]
+script = ExtResource("1_wimyj")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1872276359]
+wait_time = 3.0
+autostart = true
+
+[node name="SpawnPositions" type="Node2D" parent="." unique_id=1478801091]
+position = Vector2(344, 89)
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPositions" unique_id=1769854597]
+position = Vector2(0, -70)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPositions" unique_id=1114258682]
+position = Vector2(0, -35)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPositions" unique_id=1345262017]
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPositions" unique_id=53327754]
+position = Vector2(0, 35)
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPositions" unique_id=1303939760]
+position = Vector2(0, 70)

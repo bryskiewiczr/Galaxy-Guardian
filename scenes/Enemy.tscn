@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://c7ywqj0segsid"]
+
+[ext_resource type="Texture2D" uid="uid://ce7wlnd605b0r" path="res://assets/textures/enemy/enemy1.png" id="1_3gvst"]
+[ext_resource type="Script" uid="uid://cgue2n5ex5hkr" path="res://scripts/Enemy.cs" id="1_55jtl"]
+[ext_resource type="Texture2D" uid="uid://msmuli20x45t" path="res://assets/textures/enemy/enemy2.png" id="3_1vja8"]
+[ext_resource type="Texture2D" uid="uid://datu2cxm4o88p" path="res://assets/textures/enemy/enemy3.png" id="4_iwav8"]
+[ext_resource type="Texture2D" uid="uid://cn72pcaq6h2l1" path="res://assets/textures/enemy/enemy4.png" id="5_1i2q2"]
+[ext_resource type="Texture2D" uid="uid://ds7jnxq80kwrf" path="res://assets/textures/enemy/enemy5.png" id="6_ly5gv"]
+[ext_resource type="Texture2D" uid="uid://d1fkcth5qcohj" path="res://assets/textures/explosion/explosion1.png" id="7_1gqeq"]
+[ext_resource type="Texture2D" uid="uid://cfuxdte2r4qne" path="res://assets/textures/explosion/explosion2.png" id="8_isvm2"]
+[ext_resource type="Texture2D" uid="uid://dh7lwjr6r3s5u" path="res://assets/textures/explosion/explosion3.png" id="9_gr8dl"]
+[ext_resource type="Texture2D" uid="uid://c367tdatoxfq6" path="res://assets/textures/explosion/explosion4.png" id="10_axa8o"]
+[ext_resource type="Texture2D" uid="uid://dctoh4v4vbovm" path="res://assets/textures/explosion/explosion5.png" id="11_4iqch"]
+
+[sub_resource type="Animation" id="Animation_82o86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_3gvst")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1gqeq"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_3gvst"), ExtResource("3_1vja8"), ExtResource("4_iwav8"), ExtResource("5_1i2q2"), ExtResource("6_ly5gv")]
+}
+
+[sub_resource type="Animation" id="Animation_x3f71"]
+resource_name = "destroy"
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_1gqeq"), ExtResource("8_isvm2"), ExtResource("9_gr8dl"), ExtResource("10_axa8o"), ExtResource("11_4iqch")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Destroy"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_isvm2"]
+_data = {
+&"RESET": SubResource("Animation_82o86"),
+&"default": SubResource("Animation_1gqeq"),
+&"destroy": SubResource("Animation_x3f71")
+}
+
+[node name="Enemy" type="Area2D" unique_id=1634813189]
+script = ExtResource("1_55jtl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=784981616]
+texture = ExtResource("1_3gvst")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=996045400]
+polygon = PackedVector2Array(-11, 2, -11, -3, -9, -7, -7, -10, -5, -12, -1, -14, 6, -14, 10, -12, 10, -9, 9, -6, 9, -4, 12, 0, 9, 4, 9, 6, 10, 10, 10, 11, 5, 14, -1, 14, -6, 11, -9, 7, -11, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=472009805]
+libraries/ = SubResource("AnimationLibrary_isvm2")
+autoplay = &"default"
