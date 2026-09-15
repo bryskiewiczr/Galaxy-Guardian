@@ -54,3 +54,6 @@ autoplay = "default"
 visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_5taav")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=962272874]
+rect = Rect2(-10, -3, 2, 6)
