@@ -5,6 +5,10 @@
 [node name="EnemySpawner" type="Node2D" unique_id=317281176]
 script = ExtResource("1_wimyj")
 
+[node name="DifficultyTimer" type="Timer" parent="." unique_id=324898978]
+wait_time = 15.0
+autostart = true
+
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1872276359]
 autostart = true
 
