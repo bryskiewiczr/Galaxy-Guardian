@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cipg4w7xb8u5q" path="res://scenes/Player.tscn" id="1_ibkli"]
 [ext_resource type="PackedScene" uid="uid://djhauyt4rclak" path="res://scenes/EnemySpawner.tscn" id="4_78awf"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m206h"]
+size = Vector2(20, 200)
+
 [node name="Game" type="Node2D" unique_id=492035437]
 script = ExtResource("1_cpr0p")
 
@@ -11,3 +14,10 @@ script = ExtResource("1_cpr0p")
 position = Vector2(30, 95)
 
 [node name="EnemySpawner" parent="." unique_id=317281176 instance=ExtResource("4_78awf")]
+
+[node name="EnemyDespawner" type="Area2D" parent="." unique_id=1939573004]
+position = Vector2(-22, 0)
+
+[node name="EnemyDespawnerCollider" type="CollisionShape2D" parent="EnemyDespawner" unique_id=1559375203]
+position = Vector2(0, 90)
+shape = SubResource("RectangleShape2D_m206h")

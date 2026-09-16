@@ -8,12 +8,15 @@ public partial class Game : Node2D {
 		"res://scenes/Projectile.tscn");
 
 	private EnemySpawner _enemySpawner;
+	private Area2D _enemyDespawner;
 	
 	public override void _Ready() {
 		_player = GetNode<Player>("Player");
 		_player.ShootProjectile += OnShootProjectile;
 		_enemySpawner = GetNode<EnemySpawner>("EnemySpawner");
 		_enemySpawner.EnemySpawned += OnEnemySpawned;
+		_enemyDespawner = GetNode<Area2D>("EnemyDespawner");
+		_enemyDespawner.AreaEntered += OnEnemyDespawnerAreaEntered;
 	}
 
 	public override void _Process(double delta) {
@@ -27,5 +30,9 @@ public partial class Game : Node2D {
 
 	private void OnEnemySpawned(Enemy enemy) {
 		AddChild(enemy);
+	}
+
+	private void OnEnemyDespawnerAreaEntered(Area2D enemy) {
+		enemy.QueueFree();
 	}
 }
