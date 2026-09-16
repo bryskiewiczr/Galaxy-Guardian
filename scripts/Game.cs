@@ -32,7 +32,7 @@ public partial class Game : Node2D {
 		AddChild(enemy);
 	}
 
-	private void OnEnemyDespawnerAreaEntered(Area2D enemy) {
-		enemy.QueueFree();
+	private void OnEnemyDespawnerAreaEntered(Area2D area) {
+		if (area is Enemy) area.QueueFree();
 	}
 }
