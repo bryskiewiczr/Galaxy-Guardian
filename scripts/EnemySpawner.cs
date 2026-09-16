@@ -2,6 +2,9 @@ using Godot;
 using System;
 
 public partial class EnemySpawner : Node2D {
+
+    [Signal]
+    public delegate void EnemySpawnedEventHandler(Enemy enemyInstance);
     
     private Timer _timer;
     private Node2D _spawnPositions;
@@ -15,22 +18,24 @@ public partial class EnemySpawner : Node2D {
         
         _timer.Timeout += OnTimeoutSpawnEnemy;
     }
+    
+    private void OnTimeoutSpawnEnemy() {
+        var spawner = PickSpawner();
+        var spawnerPosition = spawner.GlobalPosition;
+        SpawnEnemy(position: spawnerPosition);
+    }
 
     private Marker2D PickSpawner() {
         var spawnerId = _random.Next(0, _spawnPositions.GetChildCount() - 1);
         var spawner = (Marker2D)_spawnPositions.GetChild(spawnerId);
         return spawner;
     }
-
+    
     private void SpawnEnemy(Vector2 position) {
         var enemyInstance = _enemyScene.Instantiate<Enemy>();
         enemyInstance.GlobalPosition = position;
-        AddChild(enemyInstance);
+        EmitSignal(SignalName.EnemySpawned, enemyInstance);
     }
 
-    private void OnTimeoutSpawnEnemy() {
-        var spawner = PickSpawner();
-        var spawnerPosition = spawner.GlobalPosition;
-        SpawnEnemy(position: spawnerPosition);
-    }
+
 }
