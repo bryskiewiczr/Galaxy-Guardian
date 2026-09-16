@@ -6,7 +6,6 @@
 script = ExtResource("1_wimyj")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1872276359]
-wait_time = 3.0
 autostart = true
 
 [node name="SpawnPositions" type="Node2D" parent="." unique_id=1478801091]

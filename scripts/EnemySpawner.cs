@@ -26,7 +26,7 @@ public partial class EnemySpawner : Node2D {
     }
 
     private Marker2D PickSpawner() {
-        var spawnerId = _random.Next(0, _spawnPositions.GetChildCount() - 1);
+        var spawnerId = _random.Next(0, _spawnPositions.GetChildCount());
         var spawner = (Marker2D)_spawnPositions.GetChild(spawnerId);
         return spawner;
     }
@@ -36,6 +36,4 @@ public partial class EnemySpawner : Node2D {
         enemyInstance.GlobalPosition = position;
         EmitSignal(SignalName.EnemySpawned, enemyInstance);
     }
-
-
 }
