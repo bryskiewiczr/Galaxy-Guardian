@@ -59,7 +59,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_x3f71"]
 resource_name = "destroy"
-length = 0.001
+length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false

@@ -48,10 +48,10 @@ script = ExtResource("1_vihyi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=689234092]
 sprite_frames = SubResource("SpriteFrames_5taav")
+animation = &"hit_animation"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438219961]
-visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_5taav")
 

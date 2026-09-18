@@ -2,13 +2,66 @@
 
 [ext_resource type="Script" uid="uid://cb21lxn6cc74v" path="res://scripts/Game.cs" id="1_cpr0p"]
 [ext_resource type="PackedScene" uid="uid://cipg4w7xb8u5q" path="res://scenes/Player.tscn" id="1_ibkli"]
+[ext_resource type="Texture2D" uid="uid://b7giueeymtq0v" path="res://assets/textures/background/bg-back.png" id="2_s0nni"]
+[ext_resource type="Texture2D" uid="uid://dwkicm88yuupw" path="res://assets/textures/background/bg-stars.png" id="3_kiw3p"]
 [ext_resource type="PackedScene" uid="uid://djhauyt4rclak" path="res://scenes/EnemySpawner.tscn" id="4_78awf"]
+[ext_resource type="Texture2D" uid="uid://h6ka5xp57nv1" path="res://assets/textures/background/bg-planet.png" id="4_400sg"]
+[ext_resource type="PackedScene" uid="uid://bleuvbrnts2wl" path="res://scenes/HUD.tscn" id="4_s0nni"]
+[ext_resource type="AudioStream" uid="uid://bkffa7hbx4gs5" path="res://assets/audio/space-asteroids.ogg" id="8_400sg"]
+[ext_resource type="AudioStream" uid="uid://cum5d3x2dom6n" path="res://assets/audio/explosion.wav" id="9_g4kob"]
+[ext_resource type="AudioStream" uid="uid://bcvgc4e4jeqwf" path="res://assets/audio/shot 1.wav" id="10_qy1jj"]
+[ext_resource type="AudioStream" uid="uid://r1jjsi0cwnyk" path="res://assets/audio/shot 2.wav" id="11_3xj3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m206h"]
 size = Vector2(20, 200)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3xj3m"]
+streams_count = 2
+stream_0/stream = ExtResource("10_qy1jj")
+stream_1/stream = ExtResource("11_3xj3m")
+
 [node name="Game" type="Node2D" unique_id=492035437]
 script = ExtResource("1_cpr0p")
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=2131746945]
+wait_time = 3.0
+one_shot = true
+
+[node name="ParallaxBG" type="Node2D" parent="." unique_id=44968355]
+
+[node name="ParallaxSpaceBG" type="Parallax2D" parent="ParallaxBG" unique_id=55045483]
+repeat_size = Vector2(326.4, 0)
+autoscroll = Vector2(-1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBG/ParallaxSpaceBG" unique_id=1707473612]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_s0nni")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ParralaxStarsBG" type="Parallax2D" parent="ParallaxBG" unique_id=1086838346]
+repeat_size = Vector2(326.4, 0)
+autoscroll = Vector2(-4, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBG/ParralaxStarsBG" unique_id=1690968242]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_kiw3p")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ParralaxPlanetBG" type="Parallax2D" parent="ParallaxBG" unique_id=1872596952]
+repeat_size = Vector2(326.4, 0)
+autoscroll = Vector2(-16, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBG/ParralaxPlanetBG" unique_id=1995664933]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_400sg")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="PlayerSpawner" type="Marker2D" parent="." unique_id=2053825967]
+position = Vector2(23, 95)
+gizmo_extents = 50.0
 
 [node name="Player" parent="." unique_id=510269655 instance=ExtResource("1_ibkli")]
 position = Vector2(30, 95)
@@ -21,3 +74,22 @@ position = Vector2(-26, 0)
 [node name="EnemyDespawnerCollider" type="CollisionShape2D" parent="EnemyDespawner" unique_id=1559375203]
 position = Vector2(0, 90)
 shape = SubResource("RectangleShape2D_m206h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1589536266]
+
+[node name="HUD" parent="CanvasLayer" unique_id=73011959 instance=ExtResource("4_s0nni")]
+metadata/_edit_lock_ = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=653839603]
+stream = ExtResource("8_400sg")
+volume_db = -2.0
+autoplay = true
+parameters/looping = true
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." unique_id=941118429]
+stream = ExtResource("9_g4kob")
+volume_db = 4.0
+
+[node name="ProjectileShotSound" type="AudioStreamPlayer2D" parent="." unique_id=173149750]
+stream = SubResource("AudioStreamRandomizer_3xj3m")
+volume_db = -8.0

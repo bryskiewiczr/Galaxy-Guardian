@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/space-asteroids.ogg-85ff3f48fa8f2c7686322b88c
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
